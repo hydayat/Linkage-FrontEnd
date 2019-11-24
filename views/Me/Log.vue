@@ -51,8 +51,9 @@
 						this.$emit('unreadAddFriendRequest',response.data.msg.unreadAddFriendRequest.unreadList)
 						this.$emit('unreadAddFriendReply',response.data.msg.unreadAddFriendReply.unreadList)
 						//开始连接websocket
+						console.log("登录后开始建立socket连接")
 						this.$emit('connectWebSockect')
-						//跳转到个人主页 	
+						//跳转到个人主页
 						this.$router.push('account');
 					})
 					.catch(error => {

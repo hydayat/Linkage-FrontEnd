@@ -222,6 +222,7 @@
 			},
 			initWebSocket() {
 				//初始化连接接口
+				console.log("initWebSocket");
 				this.connect();
 			},
 			onMessageSubmit(message) {
@@ -248,7 +249,7 @@
 				//socket连接函数
 				this.socket = new SockJS("/chat");
 				this.stompClient = Stomp.over(this.socket);
-				this.stompClient.connect({}, frame => {
+				this.stompClient.connect({}, (frame) => {
 					//serConnected(true);
 					// 第一个参数是地址，不要改
 					// 第二个参数是回调函数，在有新消息传过来之后会自动被调用
@@ -260,6 +261,7 @@
 						},
 						err => {
 							// 连接发生错误时的处理函数
+							console.log("/user/queue/chat Fail to connect")
 							console.log(err);
 						}
 					);
@@ -267,12 +269,12 @@
 				this.stompClient.connect({}, (frame) => {
 					this.stompClient.subscribe(
 						"/user/queue/friend/request",
-						//一个数组
 						(request) => {
 							this.receiveRequest(JSON.parse(request.body));
 						},
 						err => {
 							// 连接发生错误时的处理函数
+							console.log(/"user/queue/friend/request Fail to connect")
 							console.log(err);
 						}
 					);
@@ -285,6 +287,7 @@
 						},
 						err => {
 							// 连接发生错误时的处理函数
+							console.log("/user/queue/friend/reply fail to connect")
 							console.log(err);
 						}
 					);
@@ -372,7 +375,6 @@
 				);
 			},
 			receiveRequest(request) { //收好友申请 
-				//展示id不太对吧
 				invitationData.requests.push({
 					id: request.id,
 					selfIntro: request.selfIntro,
@@ -386,8 +388,7 @@
 						id: reply.id,
 						acceptStatus: reply.acceptStatus
 					})
-				);
-				
+				);	
 			},
 			requestResult(result) { //收回应
 				if(invitationData.myRequests.length==0){
@@ -396,6 +397,7 @@
 						receive:true,
 						acceptStatus:result.acceptStatus
 					})
+					return
 				}
 				for (var i = 0, len = invitationData.myRequests.length; i < len; i++) {
 					if (invitationData.myRequests[i].targetName == result.targetName) {
@@ -403,7 +405,6 @@
 						invitationData.myRequests[i].acceptStatus = result.acceptStatus;
 					}
 					if(i==len-1){
-						console.log("sssssssssss")
 						invitationData.myRequests.push({
 							targetName:result.targetName,
 							receive:true,

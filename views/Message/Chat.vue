@@ -201,6 +201,7 @@
 						name: val,
 						id: this.chatList.length
 					});
+					this.change(0);
 					return
 				}
 				for (var i = 0, len = this.chatList.length; i < len; i++) {
@@ -212,7 +213,7 @@
 						this.messageList.push([]);
 						this.chatList.push({
 							name: val,
-							id: this.chatList.length
+							id: i+1
 						});
 						this.change(i + 1);
 					}
