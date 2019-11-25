@@ -253,77 +253,32 @@ export default {
             console.log("/user/queue/chat Fail to connect");
             console.log(err);
           }
+		);
+		console.log("try to subscribe request");
+		this.stompClient.subscribe(
+          "/user/queue/friend/request",
+          request => {
+            this.receiveRequest(JSON.parse(request.body));
+          },
+          err => {
+            // 连接发生错误时的处理函数
+            console.log("/user/queue/friend/request Fail to connect");
+            console.log(err);
+          }
+		);
+		console.log("try to subscribe reply");
+		this.stompClient.subscribe(
+          "/user/queue/friend/reply",
+          reply => {
+            this.requestResult(JSON.parse(reply.body));
+          },
+          err => {
+            // 连接发生错误时的处理函数
+            console.log("/user/queue/friend/reply fail to connect");
+            console.log(err);
+          }
         );
       });
-      //   stompClient.stompClientRequest.connect({}, frame => {
-      //     stompClient.stompClientRequest.subscribe(
-      //       "/user/queue/friend/request",
-      //       request => {
-      //         this.receiveRequest(JSON.parse(request.body));
-      //       },
-      //       err => {
-      //         // 连接发生错误时的处理函数
-      //         console.log("/user/queue/friend/request Fail to connect");
-      //         console.log(err);
-      //       }
-      //     );
-      //   });
-      //   stompClient.stompClientReply.connect({}, frame => {
-      //     stompClient.stompClientReply.subscribe(
-      //       "/user/queue/friend/reply",
-      //       reply => {
-      //         this.requestResult(JSON.parse(reply.body));
-      //       },
-      //       err => {
-      //         // 连接发生错误时的处理函数
-      //         console.log("/user/queue/friend/reply fail to connect");
-      //         console.log(err);
-      //       }
-      //     );
-      //   });
-      //   this.stompClient.connect({}, frame => {
-      //     //serConnected(true);
-      //     // 第一个参数是地址，不要改
-      //     // 第二个参数是回调函数，在有新消息传过来之后会自动被调用
-      //     // 输入的参数是消息
-      //     this.stompClient.subscribe(
-      //       "/user/queue/chat",
-      //       greeting => {
-      //         this.showGreeting(JSON.parse(greeting.body));
-      //       },
-      //       err => {
-      //         // 连接发生错误时的处理函数
-      //         console.log("/user/queue/chat Fail to connect");
-      //         console.log(err);
-      //       }
-      //     );
-      //   });
-      //   this.stompClient.connect({}, frame => {
-      //     this.stompClient.subscribe(
-      //       "/user/queue/friend/request",
-      //       request => {
-      //         this.receiveRequest(JSON.parse(request.body));
-      //       },
-      //       err => {
-      //         // 连接发生错误时的处理函数
-      //         console.log("/user/queue/friend/request Fail to connect");
-      //         console.log(err);
-      //       }
-      //     );
-      //   });
-      //   this.stompClient.connect({}, frame => {
-      //     this.stompClient.subscribe(
-      //       "/user/queue/friend/reply",
-      //       reply => {
-      //         this.requestResult(JSON.parse(reply.body));
-      //       },
-      //       err => {
-      //         // 连接发生错误时的处理函数
-      //         console.log("/user/queue/friend/reply fail to connect");
-      //         console.log(err);
-      //       }
-      //     );
-      //   });
     },
     showGreeting(message) {
       //接受后端的信息并显示,聊天对象未加入chatList，新建对象插入chatList
