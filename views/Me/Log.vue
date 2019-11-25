@@ -55,6 +55,7 @@
 						this.$emit('connectWebSockect')
 						//跳转到个人主页
 						this.$router.push('account');
+						console.log("11/24 23 43")
 					})
 					.catch(error => {
 						//登录失败提示
