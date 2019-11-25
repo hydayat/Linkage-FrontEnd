@@ -16,7 +16,8 @@ let value= {
     current: [
       {
         name: "",
-        id: 0
+        id: 0,
+        unreadMessageNum:0,
       }
     ], //当前选中的聊天对象
     currentMessage: [], //与当前选中的聊天对象的聊天信息

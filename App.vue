@@ -329,7 +329,11 @@ export default {
             uploaded: true,
             viewed: true
 		  });
-		  chatData.chatList[i].unreadMessageNum++;
+		  if(chatData.current[0]!=message.name){
+			chatData.chatList[i].unreadMessageNum++;
+		  }else{
+			chatData.chatList[i].unreadMessageNum=0;
+		  }
           break;
         }
         if (i == len - 1) {
