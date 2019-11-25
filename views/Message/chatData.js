@@ -95,6 +95,6 @@ let value= {
     hideCloseButton: false,
     submitIconSize: "40px",
     closeButtonIconSize: "20px",
-    asyncMode: true
+    asyncMode: true,
   };
 export default value;

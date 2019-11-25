@@ -281,13 +281,15 @@ export default {
       });
     },
     showGreeting(message) {
-      //接受后端的信息并显示,聊天对象未加入chatList，新建对象插入chatList
+	  //接受后端的信息并显示,聊天对象未加入chatList，新建对象插入chatList
+	  //更新unreadMessage
       console.log("App.vue showGreeting");
       if (chatData.chatList.length == 0) {
         console.log("App.vue chatData.chatList is empty");
         chatData.chatList.push({
           name: message.name,
-          id: 0
+		  id: 0,
+		  unreadMessageNum:1,
         });
         chatData.messageList.push([
           {
@@ -326,13 +328,15 @@ export default {
             },
             uploaded: true,
             viewed: true
-          });
+		  });
+		  chatData.chatList[i].unreadMessageNum++;
           break;
         }
         if (i == len - 1) {
           chatData.chatList.push({
             name: message.name,
-            id: i + 1
+			id: i + 1,
+			unreadMessageNum:1,
           });
           chatData.messageList.push([
             {
