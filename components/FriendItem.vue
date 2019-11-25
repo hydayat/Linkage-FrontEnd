@@ -23,7 +23,7 @@
 </template>
 
 <script>
-	//import data from '../mock/deleteFriend.js'
+	import data from '../mock/deleteFriend.js'
 	import eventBus from '../eventBus/friendsBus'
 	export default {
 		beforeDestroy() {

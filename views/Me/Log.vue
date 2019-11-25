@@ -23,7 +23,7 @@
 </template>
 
 <script>
-	//import data from '../../mock/log.js';
+	import data from '../../mock/log.js';
 	import chatData from '../Message/chatData.js'
 	export default {
 		data() {

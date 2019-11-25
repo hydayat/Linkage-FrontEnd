@@ -70,6 +70,8 @@ export default {
   },
   created() {
     console.log("Chat.vue is created");
+	//清掉MessageBadge
+	this.$emit('clearMessageBadge')
   },
   mounted() {
     // this.initWebSocket(); //建立连接

@@ -77,7 +77,10 @@
                 <Icon type="md-notifications"></Icon>Message
               </template>
               <MenuItem name="2-1" @click.native="invitation()">Invitation</MenuItem>
-              <MenuItem name="2-2" @click.native="chat()">Chat</MenuItem>
+			  <MenuItem name="2-2" @click.native="chat()">
+				  Chat
+				  <Badge dot style="margin-left: 84px; margin-bottom: 5px;" :count='MessageBadge'/>
+			  </MenuItem>
             </Submenu>
             <Submenu name="3">
               <template slot="title">
@@ -103,6 +106,7 @@
             @submitInvitation="onSubmitInvitation"
             @submitReply="onSubmitReply"
             @connectWebSockect="connectWebSockect"
+			@clearMessageBadge="clearMessageBadge"
           ></router-view>
         </Layout>
       </Layout>
@@ -120,7 +124,8 @@ export default {
     return {
       unreadMessageList: [],
       islog: true,
-      activeName: "3-1"
+      activeName: "3-1",
+	  MessageBadge:0
     };
   },
   created() {},
@@ -132,7 +137,14 @@ export default {
     connectWebSockect() {
       this.initWebSocket();
     },
+	clearMessageBadge(){
+		this.MessageBadge = 0
+	},
     readUnreadMessage(unreadList) {
+	  //如果上线后有未读消息，显示badge
+	  if(unreadList.length != 0)
+	    this.MessageBadge = 1
+	  //将未读消息存入全局变量
       for (var i = 0, len = unreadList.length; i < len; i++) {
         this.showGreeting(unreadList[i]);
       }
@@ -326,6 +338,9 @@ export default {
       //   });
     },
     showGreeting(message) {
+	  //当前界面不是chat界面，显示MessageBadge
+	  if(this.$route.name != 'chat')
+	    this.MessageBadge = 1
       //接受后端的信息并显示,聊天对象未加入chatList，新建对象插入chatList
       console.log("App.vue showGreeting");
       if (chatData.chatList.length == 0) {

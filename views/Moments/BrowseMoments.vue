@@ -16,7 +16,7 @@
 </template>
 
 <script>
-	//import data from '../../mock/checkMoment.js'
+	import data from '../../mock/checkMoment.js'
 	import MomentItem from '../../components/MomentItem.vue';
 	export default{
 		components:{
