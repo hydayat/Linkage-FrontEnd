@@ -19,7 +19,7 @@
 </template>
 
 <script>
-	import data from '../mock/deleteSubscription.js'
+	//import data from '../mock/deleteSubscription.js'
 	export default{
 		methods:{
 			subscriptionDetail() {

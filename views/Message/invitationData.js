@@ -1,4 +1,5 @@
 let val={
+	split:0.5,
 	testname:'haha',
 	formItem: {
 		targetName: "",

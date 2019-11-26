@@ -23,13 +23,12 @@
 </template>
 
 <script>
-	import data from '../mock/isLog.js';
 	export default{
 		methods:{
 			func:function(){
 				//var url = 'http://localhost:8080/isLog';
 				//var url = 'https://www.saturnluo.cn/isLog'
-				var url = '/hisLog';
+				var url = '/isLog';
 				this.$axios
 					.get(url)
 					.then(response => {

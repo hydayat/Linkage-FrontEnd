@@ -14,8 +14,10 @@
               v-for="(persion,index) in chatList"
               :name="index"
               :key="persion.name"
-              @click.native="change(index)"
-            >{{persion.name}}</MenuItem>
+              @click.native="change(index)">
+			  <Badge :count='persion.unreadMessageNum'/>
+			  {{persion.name}}
+			</MenuItem>
           </Submenu>
         </Menu>
       </Sider>
@@ -97,6 +99,7 @@ export default {
         return;
       }
       //切换聊天对象
+	  this.chatList[index].unreadMessageNum = 0
       this.current[0].name = this.chatList[index].name;
       this.current[0].id = this.chatList[index].id;
       this.currentMessage = this.messageList[index];

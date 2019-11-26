@@ -15,7 +15,8 @@
 						:username='friend.username' 
 						:description='friend.description'
 						:iconUrl='friend.iconUrl'
-						:sex='friend.sex'>
+						:sex='friend.sex'
+						@submitInvitation='submitInvitation'>
 					</AddFriendItem>
 				</List>
 			</div>
@@ -40,7 +41,7 @@
 
 <script>
 	import AddFriendItem from '../../components/AddFriendItem.vue';
-	import data from '../../mock/searchUser.js';
+	//import data from '../../mock/searchUser.js';
 	export default {
 		data() {
 			return {
@@ -58,6 +59,7 @@
 		},
 		methods: {
 			submitInvitation(temp){
+				console.log("This is AddFriend.vue's submitInvitation()")
 				this.$emit('submitInvitation',temp)
 			},
 			searchFriend: function() {

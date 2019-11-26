@@ -53,8 +53,8 @@
 				this.modal=true;
 			},
 			sendInvitation:function(){
+				console.log("This is AddFriendItem.vue's sendInvitation()")
 				this.modal=false;
-				this.$Message.success('Invitation is send!');
 				this.invitationData.formItem.targetName=this.username;
 				this.invitationData.formItem.selfIntro=this.validation;
 				this.$emit('submitInvitation', this.invitationData.formItem);

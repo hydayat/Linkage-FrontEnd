@@ -5,6 +5,7 @@
 		<Divider/>
 		<List v-for='moment in moments' :key='moment.id' >
 			<MyMomentItem 
+				:poster_icon='poster_icon'
 				:username='moment.poster_name'
 				:time='moment.time'
 				:content='moment.text'
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-	import data from '../../mock/checkMoment.js'
+	//import data from '../../mock/checkMoment.js'
 	import MyMomentItem from '../../components/MyMomentItem.vue';
 	export default{
 		components:{

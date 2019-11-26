@@ -29,7 +29,7 @@
 
 <script>
 	import AddSubscriptionItem from '../../components/AddSubscriptionItem.vue';
-	import data from '../../mock/searchGlobalAccount.js';
+	//import data from '../../mock/searchGlobalAccount.js';
 	export default {
 		data() {
 			return {

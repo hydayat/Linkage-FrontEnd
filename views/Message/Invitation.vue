@@ -15,26 +15,56 @@
 				<Button style="margin-left: 8px">Cancel</Button>
 			</FormItem>
 		</Form> -->
-		<List header="Who wants to make friend with me" border size="large">
-			<ListItem v-for="(request,index) in requests" :name="index" :key="index">
-				{{"selfIntro:\t"+request.selfIntro}}
-				{{"\t\t\t\tname:\t"+request.username}}
-				<Button class="button" style="margin-left:70%" @click="reply(request.id,true,request.username)">Accept</Button>
-				<Button class="button" @click="reply(request.id,false,request.username)">Refuse</Button>
-			</ListItem>
-		</List>
-		</br>
-		</br>
-		</br>
-		<List header="Whom I want to make friend with" border size="large">
-			<ListItem v-for="(request,index) in myRequests" :name="index" :key="index">
-				{{"who:\t\t\t"+request.targetName}}
-				<a style="margin-left:70%">{{"result:"}}</a>
-				<Icon type="md-paper-plane" v-show="!request.receive"  />
-				<Icon type="md-checkmark-circle-outline" v-show="request.receive&&request.acceptStatus" />
-				<Icon type="md-close" v-show="request.receive&&!request.acceptStatus" />
-			</ListItem>
-		</List>
+		<Split v-model="split">
+			<div slot="left" class="demo-split-pane">
+				<Card title="Others send to me" icon="md-person" :padding="0" shadow>
+					<List>
+						<ListItem v-for="(request,index) in requests" :name="index" :key="index">
+							<div style="display: flex;justify-content: space-between; width: 98%;">
+								<div>
+									<Cell :title='request.username' :label='request.selfIntro'></Cell>
+								</div>
+								<div style="margin-top: 10px;">
+									<ButtonGroup shape='circle'>
+									<Button type="success" @click="reply(request.id,true,request.username)">
+										<Icon type="md-checkmark"></Icon>
+										Accept
+									</Button>
+									<Button type="error" @click="reply(request.id,false,request.username)">
+										Refuse
+										<Icon type="md-close"></Icon>
+									</Button>
+								</ButtonGroup>
+								</div>
+								
+								<!-- <Button class="button" @click="reply(request.id,true,request.username)">Accept</Button>
+								<Button class="button" @click="reply(request.id,false,request.username)">Refuse</Button> -->
+							</div>
+						</ListItem>
+					</List>
+				</Card>
+			</div>
+			<div slot="right" class="demo-split-pane">
+				<Card title="I send to others" icon="md-person" :padding="0" shadow>
+					<List>
+						<ListItem v-for="(request,index) in myRequests" :name="index" :key="index">
+							<div style="display: flex;justify-content: space-between; width: 98%;">
+								<div>
+									<h3 style="margin-left: 20px;">{{request.targetName}}</h3>
+								</div>
+								<div style="display: flex;justify-content: space-between;">
+									<a style="margin-top: 5px;">"result:"</a>
+									<Icon style="margin-top:8px;margin-left:5px;" type="md-paper-plane" v-show="!request.receive" />
+									<Icon style="margin-top:8px;margin-left:5px;" type="md-checkmark-circle-outline" v-show="request.receive&&request.acceptStatus" />
+									<Icon style="margin-top:8px;margin-left:5px;" type="md-close" v-show="request.receive&&!request.acceptStatus" />
+								</div>
+							</div>
+							
+						</ListItem>
+					</List>
+				</Card>
+			</div>
+		</Split>
 	</div>
 </template>
 <script>
@@ -42,6 +72,9 @@
 	import Stomp from "stompjs"
 	import invitationData from "./invitationData.js";
 	export default {
+		created() {
+			this.$emit('clearInvitationBadge')
+		},
 		mounted: function() {
 			// this.initWebSocket();
 		},
@@ -53,6 +86,7 @@
 		},
 		data() {
 			return invitationData;
+
 		},
 		methods: {
 			// connect() {
@@ -115,7 +149,7 @@
 			// 	}
 			// 	// serConnected(false);
 			// },
-			reply(id, acceptStatus,username) { //发回应
+			reply(id, acceptStatus, username) { //发回应
 				// this.stompClient.send(
 				// 	"/app/friend/check", {},
 				// 	JSON.stringify({
@@ -123,14 +157,14 @@
 				// 		acceptStatus: acceptStatus
 				// 	})
 				// );
-				this.$emit('submitReply',{
-					id:id,
-					acceptStatus:acceptStatus,
+				this.$emit('submitReply', {
+					id: id,
+					acceptStatus: acceptStatus,
 				})
 				console.log(username)
-				for(var i=0;i<this.requests.length;i++){
-					if(this.requests[i].username==username){
-						this.requests.splice(i,1)
+				for (var i = 0; i < this.requests.length; i++) {
+					if (this.requests[i].username == username) {
+						this.requests.splice(i, 1)
 						break
 					}
 				}
@@ -149,5 +183,18 @@
 <style>
 	.button {
 		float: left;
+	}
+
+	.demo-split {
+		border: 1px solid #dcdee2;
+	}
+
+	.demo-split-pane {
+		padding: 10px;
+	}
+
+	.horizontal {
+		display: inline-block;
+		margin: 10px;
 	}
 </style>

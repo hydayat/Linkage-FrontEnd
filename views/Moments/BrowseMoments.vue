@@ -8,7 +8,8 @@
 				:username='moment.poster_name'
 				:time='moment.time'
 				:content='moment.text'
-				:imgs='moment.img'>
+				:imgs='moment.img'
+				:poster_icon='moment.poster_icon'>
 			</MomentItem>
 		</List>
 		
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-	import data from '../../mock/checkMoment.js'
+	//import data from '../../mock/checkMoment.js'
 	import MomentItem from '../../components/MomentItem.vue';
 	export default{
 		components:{
@@ -35,6 +36,9 @@
 				.get(url)
 				.then(response=>{
 					this.moments = response.data
+				})
+				.catch(error=>{
+					this.$Message.error("Fail!")
 				})
 		}
 	}

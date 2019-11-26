@@ -3,7 +3,7 @@
 		<Card :bordered="false" style="width:700px; margin:0 auto;">
 			<div slot="title" style="display: flex;justify-content: flex-start;">
 				<div>
-					<Avatar shape="square" icon="ios-person" size=50 />
+					<Avatar shape="square" icon="ios-person" size=50 :src='poster_icon'/>
 				</div>
 				<div style="margin-left: 15px;">
 					<h2>{{ username }}</h2>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-	import data from '../mock/deleteMoments.js'
+	//import data from '../mock/deleteMoments.js'
 	export default {
 		data() {
 			return {
@@ -65,6 +65,7 @@
 			time:String,
 			content:String,
 			imgs:[],
+			poster_icon:String,
 		}
 	}
 </script>
