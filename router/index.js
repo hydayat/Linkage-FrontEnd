@@ -115,6 +115,11 @@ const routes = [
 		path: '/followers',
 		name: 'followers',
 		component: () => import('../views/Me/Followers.vue')
+	},
+	{
+		path: '/postArticle',
+		name: 'postArticle',
+		component: () => import('../views/Post/PostArticle.vue')
 	}
 ]
 
