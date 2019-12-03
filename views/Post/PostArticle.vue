@@ -1,13 +1,13 @@
 <template>
     <div>
         <div ref="editor" style="text-align:left"></div>
-        <button v-on:click="getContent">查看内容</button>
+        <Button type="primary" v-on:click="submit">Sumbit</Button>
     </div>
 </template>
 
 <script>
     import E from 'wangeditor'
-
+    //import data from '../../mock/uploadImgUrl'
     export default {
       name: 'editor',
       data () {
@@ -16,16 +16,44 @@
         }
       },
       methods: {
-        getContent: function () {
-            alert(this.editorContent)
-        }
+        submit: function () {
+          var url="/post"
+            .post(url, {
+              params: {
+                PostHtml:this.editorContent
+              }
+            })
+            .then(response=>{
+              console.log()
+              this.$Message.info('Sucessfully submit')
+            })
+            .catch(error=>{
+              console.log(error)
+            })
+        },
       },
       mounted() {
         var editor = new E(this.$refs.editor)
+        //editor.customConfig.uploadImgShowBase64 = true
+        editor.customConfig.uploadImgServer = '/post/img'
+        editor.customConfig.uploadFileName = 'Picture'
+        editor.customConfig.uploadImgHooks = {
+          before: function (xhr, editor, files) {
+              // 图片上传之前触发
+              // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
+              console.log(xhr)
+              // 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
+              // return {
+              //     prevent: true,
+              //     msg: '放弃上传'
+              // }
+          },
+        }
         editor.customConfig.onchange = (html) => {
           this.editorContent = html
         }
         editor.create()
+        console.log(editor)
       }
     }
 </script>
