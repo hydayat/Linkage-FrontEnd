@@ -18,6 +18,7 @@
       methods: {
         submit: function () {
           var url="/post"
+          this.$axios
             .post(url, {
               params: {
                 PostHtml:this.editorContent
