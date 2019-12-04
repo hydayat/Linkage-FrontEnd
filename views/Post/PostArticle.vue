@@ -19,11 +19,11 @@
         submit: function () {
           var url="/post"
           this.$axios
-            .post(url, {
-              params: {
+            .post(url, 
+                {
                 PostHtml:this.editorContent
-              }
-            })
+                }
+            )
             .then(response=>{
               console.log()
               this.$Message.info('Sucessfully submit')

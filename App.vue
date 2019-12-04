@@ -132,6 +132,7 @@ import Stomp from "stompjs";
 import chatData from "./views/Message/chatData.js";
 import invitationData from "./views/Message/invitationData.js";
 // import stompClient from "./stompClient.js";
+import mapObject from "./map.js";
 export default {
   data() {
     return {
@@ -201,8 +202,8 @@ export default {
     },
     showHome: function() {
       this.$router.push("home");
-	},
-	showPostArticle: function() {
+    },
+    showPostArticle: function() {
       this.$router.push("postArticle");
     },
     showMessage: function() {
@@ -277,12 +278,37 @@ export default {
         this.stompClient.subscribe(
           "/user/queue/chat",
           greeting => {
-            this.stompClient.send(
+            if (
+              mapObject.chatMap.has(JSON.stringify(JSON.parse(greeting.body)))
+            ) {
+              if (
+                mapObject.chatMap.get(
+                  JSON.stringify(JSON.parse(greeting.body))
+                ) == 3
+              ) {
+                mapObject.chatMap.delete(
+                  JSON.stringify(JSON.parse(greeting.body))
+                );
+              } else {
+                mapObject.chatMap.set(
+                  JSON.stringify(JSON.parse(greeting.body)),
+                  mapObject.chatMap.get(
+                    JSON.stringify(JSON.parse(greeting.body))
+                  ) + 1
+                );
+              }
+            } else {
+              mapObject.chatMap.set(
+                JSON.stringify(JSON.parse(greeting.body)),
+                1
+              );
+              this.showGreeting(JSON.parse(greeting.body));
+              this.stompClient.send(
               "/app/chat/confirm",
               {},
               JSON.stringify(JSON.parse(greeting.body))
             );
-            this.showGreeting(JSON.parse(greeting.body));
+            }
           },
           err => {
             // 连接发生错误时的处理函数
@@ -292,14 +318,39 @@ export default {
         );
         console.log("try to subscribe request");
         this.stompClient.subscribe(
-          "/user/queue/friend/request",
+          "/user/queue/friend.request",
           request => {
-            this.stompClient.send(
+            if (
+              mapObject.requestMap.has(JSON.stringify(JSON.parse(request.body)))
+            ) {
+              if (
+                mapObject.requestMap.get(
+                  JSON.stringify(JSON.parse(request.body))
+                ) == 3
+              ) {
+                mapObject.requestMap.delete(
+                  JSON.stringify(JSON.parse(request.body))
+                );
+              } else {
+                mapObject.requestMap.set(
+                  JSON.stringify(JSON.parse(request.body)),
+                  mapObject.requestMap.get(
+                    JSON.stringify(JSON.parse(request.body))
+                  ) + 1
+                );
+              }
+            } else {
+              mapObject.requestMap.set(
+                JSON.stringify(JSON.parse(request.body)),
+                1
+              );
+              this.receiveRequest(JSON.parse(request.body));
+              this.stompClient.send(
               "/app/friend/add/confirm",
               {},
               JSON.stringify(JSON.parse(request.body))
             );
-            this.receiveRequest(JSON.parse(request.body));
+            }
           },
           err => {
             // 连接发生错误时的处理函数
@@ -309,14 +360,36 @@ export default {
         );
         console.log("try to subscribe reply");
         this.stompClient.subscribe(
-          "/user/queue/friend/reply",
+          "/user/queue/friend.reply",
           reply => {
-			this.stompClient.send(
+            if (
+              mapObject.replyMap.has(JSON.stringify(JSON.parse(reply.body)))
+            ) {
+              if (
+                mapObject.replyMap.get(
+                  JSON.stringify(JSON.parse(reply.body))
+                ) == 3
+              ) {
+                mapObject.replyMap.delete(
+                  JSON.stringify(JSON.parse(reply.body))
+                );
+              } else {
+                mapObject.replyMap.set(
+                  JSON.stringify(JSON.parse(reply.body)),
+                  mapObject.replyMap.get(
+                    JSON.stringify(JSON.parse(reply.body))
+                  ) + 1
+                );
+              }
+            } else {
+              mapObject.replyMap.set(JSON.stringify(JSON.parse(reply.body)), 1);
+              this.requestResult(JSON.parse(reply.body));
+              this.stompClient.send(
               "/app/friend/check/confirm",
               {},
               JSON.stringify(JSON.parse(reply.body))
             );
-            this.requestResult(JSON.parse(reply.body));
+            }
           },
           err => {
             // 连接发生错误时的处理函数
@@ -378,10 +451,10 @@ export default {
             viewed: true
           });
           if (chatData.current[0].name != message.name) {
-            console.log("unreadMessageNum++")
+            console.log("unreadMessageNum++");
             chatData.chatList[i].unreadMessageNum++;
           } else {
-            console.log("unreadMessageNum=0")
+            console.log("unreadMessageNum=0");
             chatData.chatList[i].unreadMessageNum = 0;
           }
           break;
