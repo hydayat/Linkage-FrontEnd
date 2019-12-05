@@ -43,7 +43,7 @@
 		mounted(){
 			//查看好友们的朋友圈
 			//var url = 'https://www.saturnluo.cn/moment/check'
-			var url = '/moment/check'
+			var url = '/moment/home'
 			this.$axios
 				.get(url)
 				.then(response=>{
