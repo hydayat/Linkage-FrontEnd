@@ -236,6 +236,7 @@
 				.get(url)
 				.then(response => {
 					this.username1 = response.data.info.username;
+					this.$emit('myName',this.username1)
 					this.iconURL = response.data.info.iconUrl;
 					this.phone = response.data.info.phoneNumber;
 					response.data.info.sex == 1 ?

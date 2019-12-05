@@ -120,6 +120,8 @@
             @connectWebSockect="connectWebSockect"
             @clearMessageBadge="clearMessageBadge"
             @clearInvitationBadge="clearInvitationBadge"
+			@myName="initialMyName"
+			:myName='myName'
           ></router-view>
         </Layout>
       </Layout>
@@ -139,7 +141,8 @@ export default {
       islog: true,
       activeName: "3-1",
       messageBadge: 0,
-      invitationBadge: 0
+      invitationBadge: 0,
+	  myName:''
     };
   },
   created() {},
@@ -148,6 +151,9 @@ export default {
   },
   mounted() {},
   methods: {
+	initialMyName(arg){
+		this.myName = arg
+	},
     connectWebSockect() {
       this.initWebSocket();
     },
