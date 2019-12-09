@@ -47,7 +47,8 @@ export default Mock.mock(RegExp('/login' + '.*'), "post", {
 				targetName:'Trumple',
 			}]
 		},
-		username: "zzj"
+		username: "zzj",
+		admin: true
 	},
 	status: 200
 });

@@ -120,6 +120,11 @@ const routes = [
 		path: '/postArticle',
 		name: 'postArticle',
 		component: () => import('../views/Post/PostArticle.vue')
+	},
+	{
+		path: '/admin',
+		name: 'admin',
+		component: () => import('../views/Me/Admin.vue')
 	}
 ]
 
