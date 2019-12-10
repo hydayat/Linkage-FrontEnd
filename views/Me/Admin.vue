@@ -25,7 +25,7 @@
 </template>
 
 <script>
-	import data from "../../mock/admin.js"
+	////import datata from "../../mock/admin.js"
 	export default {
 		data() {
 			return {
@@ -70,7 +70,9 @@
 				var url = '/admin/post/trend'
 				console.log(this.targetKeys)
 				this.$axios
-					.post(url, this.targetKeys)
+					.post(url, {
+						trend: this.targetKeys
+					})
 					.then(response => {
 						this.$Message.success("Successfully setting the trend!")
 						this.$router.push('account')

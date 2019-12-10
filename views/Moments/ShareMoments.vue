@@ -21,7 +21,7 @@
 </template>
 
 <script>
-	import data from"../../mock/selfInfo.js"
+	//import data from"../../mock/selfInfo.js"
 	import UploadPictureByHand from '../../components/UploadPictureByHand.vue';
 	export default {
 		components:{

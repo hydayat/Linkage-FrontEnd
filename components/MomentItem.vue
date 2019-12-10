@@ -45,13 +45,13 @@
 					<Icon type="md-more" size="30" style="color: #000000;" />
 				</Button>
 			</div>
-			<Divider />
-			<div style="display: flex;">
+			<Divider v-if="likers_string == ''? false : true"/>
+			<div style="display: flex;" v-if="likers_string == ''? false : true">
 				<Icon type="md-heart" size="20" style="margin-top: 3px;" />
 				<p style="margin-left: 20px;font-size: 15px;">{{likers_string}}</p>
 			</div>
-			<Divider />
-			<div style="display: flex;margin-top: 10px;">
+			<Divider v-if="comments.length == 0? false : true"/>
+			<div v-if="comments.length == 0? false : true" style="display: flex;margin-top: 10px;">
 				<Icon type="ios-chatbubbles" size="20" style="margin-top: 15px;" />
 				<div>
 					<List style="margin-left: 20px;">
@@ -67,9 +67,9 @@
 </template>
 
 <script>
-	import data from '../mock/cancelLiking.js'
-	import data2 from '../mock/liking.js'
-	import data3 from '../mock/submitComment.js'
+	//import data from '../mock/cancelLiking.js'
+	//import data2 from '../mock/liking.js'
+	//import data3 from '../mock/submitComment.js'
 	export default {
 		data() {
 			return {
@@ -104,7 +104,7 @@
 				this.$axios
 					.post(url,{
 						MomentId: this.id,
-						Comment: this.myPostContent
+						Comment: this.myCommentContent
 					})
 					.then(response=>{
 						this.comments.push({

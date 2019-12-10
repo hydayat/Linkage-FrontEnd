@@ -13,7 +13,7 @@
 
 <script>
     import E from 'wangeditor'
-    import data from '../../mock/uploadImgUrl'
+    //import data from '../../mock/uploadImgUrl'
     export default {
       name: 'editor',
       data () {

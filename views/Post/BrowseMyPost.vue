@@ -21,7 +21,7 @@
 </template>
 
 <script>
-	import data from '../../mock/checkMoment.js'
+	//import data from '../../mock/checkMoment.js'
 	import PostItem from '../../components/PostItem.vue'
 	export default{
 		components:{

@@ -37,7 +37,7 @@
 
 <script>
 	import AddFriendItem from '../../components/AddFriendItem.vue';
-	import data from '../../mock/followers.js';
+	//import data from '../../mock/followers.js';
 	export default {
 		created(){
 			console.log('...................................Followers Page is created ...................................')

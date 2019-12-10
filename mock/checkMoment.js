@@ -14,13 +14,14 @@ export default Mock.mock(RegExp('/moment/check?' + '.*'), "get", [{
 		"like": [{
 			"liker": "zzj",
 			"moment_id": 1,
-		},{
-			"liker": "skr",
-			"moment_id": 1,
-		},{
-			"liker": "mmp",
-			"moment_id": 1,
 		}],
+		// },{
+		// 	"liker": "skr",
+		// 	"moment_id": 1,
+		// },{
+		// 	"liker": "mmp",
+		// 	"moment_id": 1,
+		// }],
 		"comment": [{
 			"id": 1,
 			"commenter": "zzj",

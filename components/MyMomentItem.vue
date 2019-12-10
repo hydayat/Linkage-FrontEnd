@@ -38,7 +38,7 @@
 </template>
 
 <script>
-	import data from '../mock/deleteMoments.js'
+	//import data from '../mock/deleteMoments.js'
 	export default {
 		data() {
 			return {

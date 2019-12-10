@@ -56,7 +56,7 @@
 </template>
 
 <script>
-	import data from '../../mock/subscriptionDetail.js'
+	//import data from '../../mock/subscriptionDetail.js'
 	export default {
 		data() {
 			return {
