@@ -53,7 +53,7 @@
 </template>
 
 <script>
-	//import data from '../../mock/friendDetail.js'
+	import data from '../../mock/friendDetail.js'
 	export default {
 		data() {
 			return {

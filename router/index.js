@@ -131,6 +131,7 @@ const routes = [
 		name: 'browserMyPost',
 		component: () => import('../views/Post/BrowseMyPost.vue')
 	},
+	{
 		path: '/admin',
 		name: 'admin',
 		component: () => import('../views/Me/Admin.vue')

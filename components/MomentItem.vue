@@ -67,9 +67,9 @@
 </template>
 
 <script>
-	//import data from '../mock/cancelLiking.js'
-	//import data2 from '../mock/liking.js'
-	//import data3 from '../mock/submitComment.js'
+	import data from '../mock/cancelLiking.js'
+	import data2 from '../mock/liking.js'
+	import data3 from '../mock/submitComment.js'
 	export default {
 		data() {
 			return {

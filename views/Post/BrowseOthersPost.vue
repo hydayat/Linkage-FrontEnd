@@ -1,8 +1,17 @@
 <template>
 	<div>
-		<br>
-		<h1 style="margin-top:10px;text-align: center;">My Post</h1>
-		<Divider />		
+		<h1 style="margin-top:10px; text-align:center;">BrowseOthers</h1>
+		<Divider/>
+		<Menu mode="horizontal" :theme="theme1" active-name="1">
+			<MenuItem name="1" v-on:click.native="showTrending">
+				<Icon type="ios-paper" />
+				Trending 
+			</MenuItem>
+			<MenuItem name="2" v-on:click.native="showMySubscription">
+				<Icon type="ios-people"/>
+				My Supscription 
+			</MenuItem>
+		</Menu>
 		<List v-for='post in posts' :key='post.id' >
 			<PostItem 
 				:id ='post.id'
@@ -16,41 +25,64 @@
 				:self_like_temp='post.self_like'>
 			</PostItem>
 		</List>
-		
 	</div>
 </template>
-
 <script>
-	//import data from '../../mock/checkMoment.js'
 	import PostItem from '../../components/PostItem.vue'
-	export default{
-		components:{
+	export default {
+		components: {
 			PostItem
 		},
-		data(){
-			return{
-				posts:[]
+		data() {
+			return {
+				theme1: 'light',
+				posts: [],
 			}
 		},
-		props:{
-			myName:String
+		props: {
+			myName: String
 		},
-		mounted(){
+		mounted() {
 			//查看好友们的朋友圈
 			var url = '/post/check'
 			this.$axios
 				.get(url)
-				.then(response=>{
+				.then(response => {
 					console.log(response)
 					this.posts = response.data
 					console.log(this.posts)
 				})
-				.catch(error=>{
+				.catch(error => {
 					this.$Message.error("Fail!")
 				})
+		},
+		methods: {
+			showTrending() {
+				var url = '/post/check'
+				this.$axios
+					.get(url)
+					.then(response => {
+						console.log(response)
+						this.posts = response.data
+						console.log(this.posts)
+					})
+					.catch(error => {
+						this.$Message.error("Fail!")
+					})
+			},
+			showMySubscription() {
+				var url = '/post/check'
+				this.$axios
+					.get(url)
+					.then(response => {
+						console.log(response)
+						this.posts = response.data
+						console.log(this.posts)
+					})
+					.catch(error => {
+						this.$Message.error("Fail!")
+					})
+			}
 		}
 	}
 </script>
-
-<style>
-</style>

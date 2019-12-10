@@ -270,7 +270,8 @@ export default {
       //点击发送的回调函数
       console.log(chatData.currentMessage);
       chatData.currentMessage.push(message);
-      this.stompClient.send(
+      if(chatData.isEmergency==false){
+        this.stompClient.send(
         //发送到后端
         "/app/chat",
         {},
@@ -280,6 +281,24 @@ export default {
           name: chatData.myself.name // 谁发的
         })
       );
+      }
+      else{
+        this.$axios
+            .post("/user/emergency", 
+                {
+                content:message.content,
+                targetName:chatData.current[0].name
+                }
+            )
+            .then(response=>{
+              console.log()
+              this.$Message.info('Sucessfully submit')
+            })
+            .catch(error=>{
+              console.log(error)
+            })
+        chatData.isEmergency=false;
+      }
       // timeout simulating the request
       setTimeout(() => {
         //发送延迟，2秒后显示发送成功

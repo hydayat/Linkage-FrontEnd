@@ -34,7 +34,7 @@
 
 <script>
 	import SubscriptionItem from '../../components/SubscriptionItem.vue';
-	//import data from '../../mock/subscription.js';
+	import data from '../../mock/subscription.js';
 	export default {
 		data() {
 			return {

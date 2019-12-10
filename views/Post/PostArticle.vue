@@ -1,5 +1,11 @@
 <template>
     <div>
+      <h1 style="margin-top:10px;">Title</h1>
+		  <Divider/>
+              <Input v-model="title" show-word-limit type="textarea" size="large" placeholder="Enter something..." maxlength="100"
+               style="width:50%;" ></Input>
+        <h1 style="margin-top:10px;">Content</h1>
+		  <Divider/>
         <div ref="editor" style="text-align:left"></div>
         <Button type="primary" v-on:click="submit">Sumbit</Button>
     </div>
@@ -7,21 +13,27 @@
 
 <script>
     import E from 'wangeditor'
-    //import data from '../../mock/uploadImgUrl'
+    import data from '../../mock/uploadImgUrl'
     export default {
       name: 'editor',
       data () {
         return {
-          editorContent: ''
+          editorContent: '',
+          title:'',
+          modal:false
         }
       },
       methods: {
+        writeTitle:function(){
+          this.modal=true
+        },
         submit: function () {
           var url="/post"
           this.$axios
             .post(url, 
                 {
-                PostHtml:this.editorContent
+                PostHtml:this.editorContent,
+                Title:this.title
                 }
             )
             .then(response=>{
@@ -50,6 +62,7 @@
               // }
           },
         }
+        editor.customConfig.colors
         editor.customConfig.onchange = (html) => {
           this.editorContent = html
         }

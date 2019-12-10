@@ -38,7 +38,7 @@
 
 <script>
 	import FriendItem from '../../components/FriendItem.vue';
-	//import data from '../../mock/friends.js';
+	import data from '../../mock/friends.js';
 	export default {
 		created(){
 			console.log('...................................Friends Page is created ...................................')

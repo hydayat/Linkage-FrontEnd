@@ -178,11 +178,11 @@
 </template>
 
 <script>
-	//import data from "../../mock/selfInfo.js"
-	//import data2 from "../../mock/changeSelfInfo.js"
-	//import data3 from "../../mock/createBigAccont.js"
-	//import data4 from "../../mock/hasBigAccount.js"
-	//import data5 from "../../mock/changeBigAccountInfo.js"
+	import data from "../../mock/selfInfo.js"
+	import data2 from "../../mock/changeSelfInfo.js"
+	import data3 from "../../mock/createBigAccont.js"
+	import data4 from "../../mock/hasBigAccount.js"
+	import data5 from "../../mock/changeBigAccountInfo.js"
 	export default {
 		data() {
 			return {

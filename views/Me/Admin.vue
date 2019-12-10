@@ -25,7 +25,7 @@
 </template>
 
 <script>
-	//import data from "../../mock/admin.js"
+	import data from "../../mock/admin.js"
 	export default {
 		data() {
 			return {

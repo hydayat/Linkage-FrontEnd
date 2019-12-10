@@ -41,7 +41,7 @@
 
 <script>
 	import AddFriendItem from '../../components/AddFriendItem.vue';
-	//import data from '../../mock/searchUser.js';
+	import data from '../../mock/searchUser.js';
 	export default {
 		data() {
 			return {

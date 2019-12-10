@@ -43,12 +43,13 @@
                 :asyncMode="asyncMode"
               >
                 <template v-slot:header>
-                  <div class="header-slot">
+                  <div class="header-slot" style="width:100%">
                     <a
                       v-for="(participant, index) in current"
                       :key="index"
                       class="custom-title"
                     >{{`${participant.name} `}}</a>
+                      <Button type="error" style="float:right" ghost shape="circle" label="small" @click="onClickEmergency">Emergency</Button>
                   </div>
                 </template>
               </Chat>
@@ -110,6 +111,9 @@ export default {
       console.log("typing");
     },
     onMessageSubmit(message) {
+      if(this.isEmergency==true){
+        this.colors.submitIcon="#8f98a8"
+      }
       this.$emit("submitMessage", message);
     },
     // onMessageSubmit(message) {
@@ -242,6 +246,16 @@ export default {
           this.change(i + 1);
         }
       }
+    },
+    onClickEmergency(){
+      this.$Notice.info({
+        title: 'Notice',
+        desc: 'Next message will be sent to the mailbox',
+        duration: 2
+      });
+      this.isEmergency=true
+      console.log( this.isEmergency)
+      this.colors.submitIcon="#e81316"
     }
   }
 };

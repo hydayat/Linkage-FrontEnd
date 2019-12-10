@@ -84,7 +84,7 @@ let value= {
           bg: "#f7f3f3"
         }
       },
-      submitIcon: "#b91010" //发送图标
+      submitIcon: "#8f98a8" //发送图标
     },
     borderStyle: {
       //聊天框border 曲角程度
@@ -97,5 +97,6 @@ let value= {
     submitIconSize: "40px",
     closeButtonIconSize: "20px",
     asyncMode: true,
+    isEmergency:false,
   };
 export default value;
