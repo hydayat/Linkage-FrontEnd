@@ -1,5 +1,8 @@
 <template>
     <div>
+		<br>
+		<h1 style="margin-top:10px;text-align: center;">Post Article</h1>
+		<Divider />	
         <div ref="editor" style="text-align:left"></div>
         <Button type="primary" v-on:click="submit">Sumbit</Button>
     </div>
