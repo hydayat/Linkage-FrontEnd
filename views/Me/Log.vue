@@ -43,8 +43,11 @@
 						//登录成功提示
 						this.$Message.success('Sign in successfully!');
 						//显示侧栏
-						//this.$parent.$parent.$parent.$parent.islog=true;
-						this.$emit('child-event','LogSuccess');
+						//this.$emit('child-event','LogSuccess');
+						//显示管理员按钮
+						if(response.data.msg.admin == true){
+							this.$emit('admin-log')
+						}
 						//初始化全局变量
 						chatData.myself.name = this.username
 						this.$emit('unreadMessage',response.data.msg.unreadMessage.unreadList)

@@ -17,6 +17,9 @@
 					<Input v-model='formItem.code' search enter-button="Get code" placeholder="Enter validation code" @on-search='getCode()' />
 				</div>
 			</FormItem>
+			<FormItem label="E-mail">
+				<Input v-model="formItem.email" placeholder="Enter E-mail address"></Input>
+			</FormItem>
 			<!-- <FormItem label="DatePicker">
 				<Row>
 					<Col span="11">
@@ -51,6 +54,7 @@
 					password2: '',
 					phone: '',
 					code: '',
+					email: ''
 					// gender: 'male',
 					// date: '',
 					// time: '',
@@ -93,7 +97,8 @@
 						phoneNumber: this.formItem.phone,
 						userName: this.formItem.username,
 						userPassword: this.formItem.password1,
-						verificationCode: this.formItem.code
+						verificationCode: this.formItem.code,
+						email: this.formItem.email
 					});
 					// this.$axios({
 					// 		method: 'post',
@@ -105,7 +110,8 @@
 							phoneNumber: this.formItem.phone,
 							userName: this.formItem.username,
 							userPassword: this.formItem.password1,
-							verificationCode: this.formItem.code
+							verificationCode: this.formItem.code,
+							email: this.formItem.email
 						})
 						.then(response => {
 							//注册成功

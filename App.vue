@@ -45,7 +45,11 @@
       <Header>
         <div>
           <font color="#FFFFFF" size="5">Linkage</font>
+		  <!-- <Button type='primary' v-if='isAdmin'>Admin</Button> -->
         </div>
+		<!-- <div>
+			<Button type='primary' v-if='isAdmin'>Admin</Button>
+		</div> -->
       </Header>
       <Layout>
         <Sider hide-trigger :style="{background: '#fff'}">
@@ -111,6 +115,7 @@
           </keep-alive>-->
           <router-view
             @child-event="parentEvent"
+			@admin-log="showAdminButton"
             @changeActiveName="changeActiveName"
             @submitMessage="onMessageSubmit"
             @unreadMessage="readUnreadMessage"
@@ -141,6 +146,7 @@ export default {
     return {
       unreadMessageList: [],
       islog: true,
+	  isAdmin: false,
       activeName: "3-1",
       messageBadge: 0,
       invitationBadge: 0,
@@ -153,6 +159,9 @@ export default {
   },
   mounted() {},
   methods: {
+	showAdminButton(){
+		this.isAdmin = true
+	},
 	initialMyName(arg){
 		this.myName = arg
 	},

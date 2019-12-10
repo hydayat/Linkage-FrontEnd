@@ -65,6 +65,7 @@
 			</div>
 		</Modal>
 		<!-- 以下是主界面 -->
+		<Button type="warning" shape="circle" icon="ios-construct" style="margin:10px;float: right;" v-if="isAdmin" to="admin">Admin</Button>
 		<br />
 		<h1 style="text-align: center;">Account</h1>
 		<br />
@@ -192,6 +193,7 @@
 
 				//私人账号个人信息
 				modal1: false,
+				isAdmin: false,
 				username1: "",
 				iconURL: "",
 				phone: "",
@@ -244,6 +246,8 @@
 						(this.gender = "md-woman");
 					this.description1 = response.data.info.description;
 					this.address = response.data.info.address;
+					//显示管理员按钮
+					this.isAdmin = response.data.info.admin
 				})
 				.catch(error => {
 					console.log(error);
