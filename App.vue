@@ -70,7 +70,8 @@
                 <Icon type="logo-chrome"></Icon>Posts
               </template>
               <MenuItem name="4-1" @click.native="showPostArticle()">Post Article</MenuItem>
-              <MenuItem name="4-2">Browse Others</MenuItem>
+              <MenuItem name="4-2" @click.native="showMyPost()">My Post</MenuItem>
+              <MenuItem name="4-3" @click.native="showOthersPost()">Browse Others</MenuItem>
             </Submenu>
             <Submenu name="2">
               <template slot="title">
@@ -211,6 +212,12 @@ export default {
     },
     showPostArticle: function() {
       this.$router.push("postArticle");
+    },
+    showMyPost: function() {
+      this.$router.push("browseMyPost");
+    },
+    showOthersPost: function() {
+      this.$router.push("browseOthersPost");
     },
     showMessage: function() {
       this.$router.push("message");

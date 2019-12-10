@@ -120,7 +120,17 @@ const routes = [
 		path: '/postArticle',
 		name: 'postArticle',
 		component: () => import('../views/Post/PostArticle.vue')
-	}
+	},
+	{
+		path: '/browseOthersPost',
+		name: 'browserOthersPost',
+		component: () => import('../views/Post/BrowseOthersPost.vue')
+	},
+	{
+		path: '/browseMyPost',
+		name: 'browserMyPost',
+		component: () => import('../views/Post/BrowseMyPost.vue')
+	},
 ]
 
 const router = new VueRouter({

@@ -7,7 +7,7 @@
 			</p>
 			<Form style="margin:auto">
 				<FormItem>
-					<Input v-model="myCommentContent" show-word-limit type="textarea" placeholder="Enter something..." maxlength="300"
+					<Input v-model="myPostContent" show-word-limit type="textarea" placeholder="Enter something..." maxlength="300"
 					 :autosize="{minRows: 3,maxRows: 5}"></Input>
 				</FormItem>
 			</Form>
@@ -21,17 +21,18 @@
 					<Avatar shape="square" icon="ios-person" size=50 :src='poster_icon' />
 				</div>
 				<div style="margin-left: 15px;">
-					<h2>{{ username }}</h2>
+					<h2>{{ poster_name }}</h2>
 					<p style="margin-top: 5px;font-size: 12px;">{{ time }}</p>
 				</div>
 			</div>
-			<div style="margin-bottom: 15px;">
-				{{content}}
-			</div>
-			<div style="display: flex;justify-content: flex-start;">
-				<List v-for='img in imgs' :key='img.id'>
-					<img :src="img" style="width:200px; height: 200px;margin:5px;" />
-				</List>
+			<div>
+				<Collapse simple>
+					<Panel name="1"  @click.native="showHTML">
+						Abstraction:{{postAbstract}}	
+						<p slot="content" v-html="html">
+						</p>
+					</Panel>
+				</Collapse>
 			</div>
 			<div style="display: flex;justify-content: flex-end;margin-top: 10px;">
 				<Button shape="circle" style="border-color: #FFFFFF;" v-on:click="like">
@@ -55,7 +56,7 @@
 				<Icon type="ios-chatbubbles" size="20" style="margin-top: 15px;" />
 				<div>
 					<List style="margin-left: 20px;">
-						<ListItem v-for='comment in comments' :key='comment.id' style="display: flex;word-wrap: break-word;">
+						<ListItem v-for='comment in comment' :key='comment.id' style="display: flex;word-wrap: break-word;">
 							<h3 style="color: cornflowerblue;">{{comment.commenter}}：</h3>
 							<p style="margin-top:2.5px;">{{comment.content}}</p>
 						</ListItem>
@@ -74,44 +75,44 @@
 		data() {
 			return {
 				modal:false,
-				myCommentContent:'',
+				myPostContent:'',
 				likers_string: "",
 				activeColor: '#272296',
 				self_like: false,
+				html:""
 			}
 		},
 		props: {
-			myName: String,
-			id: Number,
-			username: String, //发布该朋友圈的用户的名字
-			time: String,
-			content: String,
-			imgs: Array,
-			poster_icon: String,
-			likers_list: Array,
-			comments: Array,
-			self_like_temp: Boolean
+			myName:String,
+            id: Number,
+            poster_name: String,
+            time: String,
+            poster_icon: String,
+            postAbstract: String,
+            likerList: Array,
+            comment: Array,
+            self_like_temp: Boolean
 		},
 		mounted() {
-			console.log("MomentItem.vue mounted.")
+			console.log("PostItem.vue mounted.")
 			//更新点赞者列表
 			this.updateLiker_string()
 			this.self_like = this.self_like_temp
 		},
 		methods: {
 			submit(){
-				var url = '/moment/comment/add'
+				var url = '/post/comment/add'
 				this.$axios
 					.post(url,{
-						MomentId: this.id,
+						PostId: this.id,
 						Comment: this.myPostContent
 					})
 					.then(response=>{
-						this.comments.push({
+						this.comment.push({
 							id: this.id,
 							commenter: this.myName,
-							moment_id: 20,
-							content: this.myCommentContent
+							post_id: 20,
+							content: this.myPostContent
 						})
 						this.modal = false
 					})
@@ -126,8 +127,7 @@
 			like() {
 				if (this.self_like == true) {
 					//取消点赞
-
-					var url = '/moment/like?MomentId=' + this.id + "&Action=cancel"
+					var url = '/post/like?PostId=' + this.id + "&Action=cancel"
 					this.$axios
 						.post(url)
 						.then(response => {
@@ -135,9 +135,9 @@
 							this.self_like = false
 							//删除点赞人列表中的自己
 							var i = 0
-							for (i = 0; i < this.likers_list.length; i++) {
-								if (this.likers_list[i].liker == this.myName) {
-									this.likers_list.splice(i, 1)
+							for (i = 0; i < this.likerList.length; i++) {
+								if (this.likerList[i].liker == this.myName) {
+									this.likerList.splice(i, 1)
 									break
 								}
 							}
@@ -148,16 +148,16 @@
 						})
 				} else {
 					//点赞
-					url = '/moment/like?MomentId=' + this.id + "&Action=like"
+					url = '/post/like?PostId=' + this.id + "&Action=like"
 					this.$axios
 						.post(url)
 						.then(response => {
 							//更改点赞图标样式
 							this.self_like = true
 							//在点赞列表中新增自己
-							this.likers_list.push({
+							this.likerList.push({
 								"liker": this.myName,
-								"moment_id": this.id,
+								"_id": this.id,
 							})
 							this.updateLiker_string()
 						})
@@ -167,18 +167,30 @@
 				}
 			},
 			updateLiker_string() {
-				if (this.likers_list.length > 0) { //如果有点赞者
+				if (this.likerList.length > 0) { //如果有点赞者
 					this.likers_string = ""
 					var i
-					for (i = 0; i < this.likers_list.length; i++) {
+					for (i = 0; i < this.likerList.length; i++) {
 						if (i == 0) {
-							this.likers_string += this.likers_list[i].liker
+							this.likers_string += this.likerList[i].liker
 						} else {
-							this.likers_string += '、' + this.likers_list[i].liker
+							this.likers_string += '、' + this.likerList[i].liker
 						}
 					}
 				} else //没有点赞者
 					this.likers_string = ''
+			},
+			showHTML(){
+				var url = '/post/article/' + this.id + ".html";
+				this.$axios
+					.get(url)
+					.then(response => {
+						console.log(response.data)
+						this.html=response.data
+					})
+					.catch(e => {
+						this.$Message.error("Fail to showHTML.")
+					})
 			}
 		}
 	}
