@@ -43,8 +43,8 @@
 			myName: String
 		},
 		mounted() {
-			//查看好友们的朋友圈
-			var url = '/post/check'
+			//查看热搜
+			var url = '/post/hot'
 			this.$axios
 				.get(url)
 				.then(response => {
@@ -58,7 +58,7 @@
 		},
 		methods: {
 			showTrending() {
-				var url = '/post/check'
+				var url = '/post/hot'
 				this.$axios
 					.get(url)
 					.then(response => {

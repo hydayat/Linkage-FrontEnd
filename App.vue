@@ -76,6 +76,7 @@
               <MenuItem name="4-1" @click.native="showPostArticle()">Post Article</MenuItem>
               <MenuItem name="4-2" @click.native="showMyPost()">My Post</MenuItem>
               <MenuItem name="4-3" @click.native="showOthersPost()">Browse Others</MenuItem>
+              <MenuItem name="4-4" @click.native="showSearchPost()">Search Post</MenuItem>
             </Submenu>
             <Submenu name="2">
               <template slot="title">
@@ -221,6 +222,9 @@ export default {
     },
     showPostArticle: function() {
       this.$router.push("postArticle");
+    },
+    showSearchPost: function() {
+      this.$router.push("searchPost");
     },
     showMyPost: function() {
       this.$router.push("browseMyPost");

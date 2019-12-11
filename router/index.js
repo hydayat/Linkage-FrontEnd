@@ -132,6 +132,11 @@ const routes = [
 		component: () => import('../views/Post/BrowseMyPost.vue')
 	},
 	{
+		path: '/searchPost',
+		name: 'searchPost',
+		component: () => import('../views/Post/SearchPost.vue')
+	},
+	{
 		path: '/admin',
 		name: 'admin',
 		component: () => import('../views/Me/Admin.vue')
