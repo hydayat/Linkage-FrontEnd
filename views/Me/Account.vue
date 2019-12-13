@@ -133,7 +133,7 @@
 									<div class="horizontal">
 										<Avatar shape="circle" :src="iconURL2" icon="ios-people" size="100" />
 										<!--上传大号头像-->
-										<Upload action="/global_icon" name="Icon" :show-upload-list="false" :on-success="handleChangeAvatorSuccess2"
+										<Upload :action="uploadBigAvatarUrl" name="Icon" :show-upload-list="false" :on-success="handleChangeAvatorSuccess2"
 										 :on-error="handleChangeAvatorError2" :before-upload="handleBeforeChangeAvator2">
 											<Button icon="ios-cloud-upload-outline" style="margin-top: 5px;">Change</Button>
 										</Upload>
@@ -208,6 +208,7 @@
 				},
 
 				//公众号信息
+				uploadBigAvatarUrl: '',
 				HasBigAccount: false,
 				modal2: false,
 				username2: "Super-H",
@@ -302,6 +303,7 @@
 				return true;
 			},
 			handleBeforeChangeAvator2: function(file) {
+				this.uploadBigAvatarUrl = '/global_icon?GlobalName=' + this.username2
 				return true;
 			},
 			changeInfo: function() {
