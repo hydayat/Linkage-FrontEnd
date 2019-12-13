@@ -51,8 +51,8 @@
 				<Icon type="md-heart" size="20" style="margin-top: 3px;" />
 				<p style="margin-left: 20px;font-size: 15px;">{{likers_string}}</p>
 			</div>
-			<Divider v-if="comments.length == 0? false : true"/>
-			<div style="display: flex;margin-top: 10px;" v-if="comments.length == 0? false : true">
+			<Divider v-if="comment.length == 0? false : true"/>
+			<div style="display: flex;margin-top: 10px;" v-if="comment.length == 0? false : true">
 				<Icon type="ios-chatbubbles" size="20" style="margin-top: 15px;" />
 				<div>
 					<List style="margin-left: 20px;">
@@ -98,6 +98,12 @@
 			//更新点赞者列表
 			this.updateLiker_string()
 			this.self_like = this.self_like_temp
+			if(this.comment==null){
+				this.comment=[]
+			}
+			if(this.likerList==null){
+				this.likerList=[]
+			}
 		},
 		methods: {
 			submit(){
