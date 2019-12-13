@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Card :bordered="true" style="width:400px;display:nline-block;">
+    <Card :bordered="true" style="width:400px;display:inline-block;">
       <div>
         <div class="horizontal">
           <Avatar shape="square" icon="ios-person" :src="iconUrl" size="100" />
