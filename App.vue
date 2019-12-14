@@ -449,6 +449,14 @@ export default {
       if (this.$route.name != "chat") this.messageBadge = 1;
       //接受后端的信息并显示,聊天对象未加入chatList，新建对象插入chatList
       //更新unreadMessage
+      console.log(message.timeStamp)
+      var date = new Date(message.timeStamp);
+      var Y = date.getFullYear()
+      var M = date.getMonth()
+      var D = date.getDate() 
+      var h = date.getHours() 
+      var m = date.getMinutes()
+      var s = date.getSeconds()
       console.log("App.vue showGreeting");
       if (chatData.chatList.length == 0) {
         console.log("App.vue chatData.chatList is empty");
@@ -463,12 +471,12 @@ export default {
             myself: false,
             participantId: 0,
             timestamp: {
-              year: 2014,
-              month: 3,
-              day: 5,
-              hour: 20,
-              minute: 10,
-              second: 3,
+              year: Y,
+              month: M,
+              day: D,
+              hour: h,
+              minute: m,
+              second: s,
               millisecond: 123
             },
             uploaded: true,
@@ -484,12 +492,12 @@ export default {
             myself: false,
             participantId: i,
             timestamp: {
-              year: 2014,
-              month: 3,
-              day: 5,
-              hour: 20,
-              minute: 10,
-              second: 3,
+              year: Y,
+              month: M,
+              day: D,
+              hour: h,
+              minute: m,
+              second: s,
               millisecond: 123
             },
             uploaded: true,

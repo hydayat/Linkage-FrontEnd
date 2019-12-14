@@ -2,7 +2,7 @@
 	<div>
 		<br>
 		<h1 style="margin-top:10px;text-align: center;">Search Post</h1>
-        <Button type="primary" shape="circle" icon="md-arrow-back" style="margin:10px;" to="friends">Back</Button>
+        <!-- <Button type="primary" shape="circle" icon="md-arrow-back" style="margin:10px;" to="friends">Back</Button> -->
 		<center style="margin-top:10px;">
 			<i-input placeholder="Search Post" style='width: 200px;' v-model='keyword'>
 				<Button slot="append" icon="ios-search" v-on:click='searchByKeyword()'></Button>
@@ -51,7 +51,7 @@
                     .get(url)
                     .then(response => {
                         console.log(response)
-                        this.posts = response.data
+						this.posts = response.data
                         console.log(this.posts)
                     })
                     .catch(error => {

@@ -28,7 +28,7 @@
 			<div>
 				<Collapse simple>
 					<Panel name="1"  @click.native="showHTML">
-						Abstraction:{{postAbstract}}	
+						<font size="5">Title:{{postAbstract}}</font>
 						<p slot="content" v-html="html">
 						</p>
 					</Panel>

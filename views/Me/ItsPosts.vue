@@ -50,7 +50,7 @@ import PostItem from '../../components/PostItem.vue'
 		mounted() {
 			this.username = this.$route.params.subscriptionName
 			this.currentPage = this.$route.params.currentPage
-			var url = '/post/?username='+this.username
+			var url = '/post/home?username='+this.username
 			//var url = '/moment/check'
 			this.$axios
 				.get(url)
