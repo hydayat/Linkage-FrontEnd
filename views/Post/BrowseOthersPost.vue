@@ -1,17 +1,19 @@
 <template>
 	<div>
+		<br>
 		<h1 style="margin-top:10px; text-align:center;">BrowseOthers</h1>
 		<Divider/>
-		<Menu mode="horizontal" :theme="theme1" active-name="1">
-			<MenuItem name="1" v-on:click.native="showTrending">
-				<Icon type="ios-paper" />
-				Trending 
-			</MenuItem>
-			<MenuItem name="2" v-on:click.native="showMySubscription">
-				<Icon type="ios-people"/>
-				My Supscription 
-			</MenuItem>
-		</Menu>
+
+		<RadioGroup v-model="init">
+			<Radio label="Trending"  v-on:click.native="showTrending">
+				<Icon type="md-flame"></Icon>
+				<span>Trending</span>
+			</Radio>
+			<Radio label="Supscription" v-on:click.native="showMySubscription">
+				<Icon type="md-people"></Icon>
+				<span>My Supscription</span>
+			</Radio>
+		</RadioGroup>
 		<List v-for='post in posts' :key='post.id' >
 			<PostItem 
 				:id ='post.id'
@@ -37,6 +39,7 @@
 			return {
 				theme1: 'light',
 				posts: [],
+				init:"Trending"
 			}
 		},
 		props: {

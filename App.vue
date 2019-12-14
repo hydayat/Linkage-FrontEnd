@@ -74,7 +74,6 @@
                 <Icon type="logo-chrome"></Icon>Posts
               </template>
               <MenuItem name="4-1" @click.native="showPostArticle()">Post Article</MenuItem>
-              <MenuItem name="4-2" @click.native="showMyPost()">My Post</MenuItem>
               <MenuItem name="4-3" @click.native="showOthersPost()">Browse Others</MenuItem>
               <MenuItem name="4-4" @click.native="showSearchPost()">Search Post</MenuItem>
             </Submenu>
