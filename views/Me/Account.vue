@@ -267,6 +267,7 @@
 					this.iconURL2 = temp.iconUrl;
 					this.description2 = temp.description;
 					this.follower = temp.followerNumber;
+					this.uploadBigAvatarUrl = '/global_icon?GlobalName=' + this.username2
 				})
 				.catch(error => {
 					this.HasBigAccount = false;
@@ -303,7 +304,6 @@
 				return true;
 			},
 			handleBeforeChangeAvator2: function(file) {
-				this.uploadBigAvatarUrl = '/global_icon?GlobalName=' + this.username2
 				return true;
 			},
 			changeInfo: function() {
