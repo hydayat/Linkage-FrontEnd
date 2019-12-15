@@ -113,6 +113,7 @@
           <!-- <keep-alive>
 						<router-view @child-event='parentEvent'></router-view>
           </keep-alive>-->
+            <transition name="slide">
           <router-view
             @child-event="parentEvent"
 			@admin-log="showAdminButton"
@@ -129,6 +130,7 @@
 			@myName="initialMyName"
 			:myName='myName'
           ></router-view>
+           </transition>
         </Layout>
       </Layout>
     </Layout>

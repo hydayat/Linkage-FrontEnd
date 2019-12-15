@@ -39,8 +39,11 @@
             .then(response=>{
               console.log()
               this.$Message.info('Sucessfully submit')
+              this.title=''
+              editor.txt.clear()
             })
             .catch(error=>{
+              this.$Message.info('Failed')
               console.log(error)
             })
         },
