@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<br>
-		<h1 style="margin-top:10px; text-align:center;">BrowseOthers</h1>
+		<h1 style="margin-top:10px; text-align:center;">Browse Others</h1>
 		<Divider/>
 
 		<RadioGroup v-model="init">

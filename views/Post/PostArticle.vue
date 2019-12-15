@@ -20,7 +20,8 @@
         return {
           editorContent: '',
           title:'',
-          modal:false
+          modal:false,
+          editor:{}
         }
       },
       methods: {
@@ -40,7 +41,7 @@
               console.log()
               this.$Message.info('Sucessfully submit')
               this.title=''
-              editor.txt.clear()
+              this.editor.txt.clear()
             })
             .catch(error=>{
               this.$Message.info('Failed')
@@ -50,6 +51,7 @@
       },
       mounted() {
         var editor = new E(this.$refs.editor)
+        this.editor=editor
         //editor.customConfig.uploadImgShowBase64 = true
         editor.customConfig.uploadImgServer = '/post/img'
         editor.customConfig.uploadFileName = 'Picture'
@@ -64,6 +66,18 @@
               //     msg: '放弃上传'
               // }
           },
+          customInsert: function (insertImg, result, editor) {
+              // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+              // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+
+              // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+              var url = result.url
+              console.log(result)
+              editor.txt.append('<img src="'+result.data[0]+'">')
+              this.editorContent=editor.txt.html()
+              console.log(this.editorContent)
+              // result 必须是一个 JSON 格式字符串！！！否则报错
+          }
         }
         editor.customConfig.colors
         editor.customConfig.onchange = (html) => {
