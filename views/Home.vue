@@ -5,7 +5,7 @@
 			<br />
 			<br />
 			<br />
-			<h1 style="text-align: center;">Welcome to Linkage</h1>
+			<h1 style="text-align: center;">Welcome to Linkage 1.2</h1>
 			<Divider/>
 		</div>
 		<div style="margin:10px 5px 15px 270px">

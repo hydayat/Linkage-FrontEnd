@@ -41,6 +41,9 @@
 				<Button shape="circle" style="border-color: #FFFFFF;" v-on:click='writeComment'>
 					<Icon type="ios-chatbubbles-outline" size="30" style="color: #000000;" />
 				</Button>
+				<Button v-if="isMyPost" shape="circle" style="border-color: #FFFFFF;" v-on:click='deleteMoment()'>
+					<Icon type="ios-trash-outline" size="30"/>
+				</Button>
 				<Button shape="circle" style="border-color: #FFFFFF;">
 					<Icon type="md-more" size="30" style="color: #000000;" />
 				</Button>
@@ -81,6 +84,7 @@
 			}
 		},
 		props: {
+			isMyPost:Boolean,
 			myName: String,
 			id: Number,
 			username: String, //发布该朋友圈的用户的名字
@@ -99,6 +103,18 @@
 			this.self_like = this.self_like_temp
 		},
 		methods: {
+			deleteMoment(){
+				var url = '/moment/delete?id='+this.id
+				this.$axios
+					.post(url)
+					.then(response=>{
+						this.$emit('deleteMoment',this.id)
+						this.$Message.success('Success')
+					})
+					.catch(error=>{
+						this.$Message.error('Fail')
+					})
+			},
 			submit(){
 				var url = '/moment/comment/add'
 				this.$axios

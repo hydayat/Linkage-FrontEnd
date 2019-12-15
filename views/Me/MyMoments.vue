@@ -4,30 +4,37 @@
 		<h1 style="text-align: center;">My Moments</h1>
 		<Divider/>
 		<List v-for='moment in moments' :key='moment.id' >
-			<MyMomentItem 
-				:poster_icon='poster_icon'
+			<MomentItem
+				:isMyPost='true'
+				:self_like_temp='moment.self_like'
+				:id='moment.id'
 				:username='moment.poster_name'
 				:time='moment.time'
 				:content='moment.text'
 				:imgs='moment.img'
-				:id='moment.id'
-				@deleteMoment='deleteMoment'>
-			</MyMomentItem>
+				:poster_icon='moment.poster_icon'
+				:likers_list='moment.like'
+				:comments='moment.comment'
+				:myName='myName'>
+			</MomentItem>
 		</List>
 	</div>
 </template>
 
 <script>
 	//import data from '../../mock/checkMoment.js'
-	import MyMomentItem from '../../components/MyMomentItem.vue';
+	import MomentItem from '../../components/MomentItem.vue';
 	export default{
 		components:{
-			MyMomentItem
+			MomentItem
 		},
 		data(){
 			return{
 				moments:[]
 			}
+		},
+		props:{
+			myName:String
 		},
 		methods:{
 			deleteMoment(id){
