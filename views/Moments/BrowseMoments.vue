@@ -5,6 +5,7 @@
 		<Divider />		
 		<List v-for='moment in moments' :key='moment.id' >
 			<MomentItem 
+				:isMyPost="false"
 				:self_like_temp='moment.self_like'
 				:id='moment.id'
 				:username='moment.poster_name'

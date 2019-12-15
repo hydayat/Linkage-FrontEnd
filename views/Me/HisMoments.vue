@@ -16,12 +16,18 @@
 		<h1 style="margin-top:10px;text-align: center;">{{username}}'s Moments</h1>
 		<Divider />
 		<List v-for='moment in moments' :key='moment.id' >
-			<MomentItem 
+			<MomentItem
+				:isMyPost="false"
+				:self_like_temp='moment.self_like'
+				:id='moment.id'
 				:username='moment.poster_name'
 				:time='moment.time'
 				:content='moment.text'
 				:imgs='moment.img'
-				:poster_icon='moment.poster_icon'>
+				:poster_icon='moment.poster_icon'
+				:likers_list='moment.like'
+				:comments='moment.comment'
+				:myName='myName'>
 			</MomentItem>
 		</List>
 	</div>
@@ -39,6 +45,9 @@
 				currentPage:0,//该好友在好友列表中的第几页
 				moments:[]
 			}
+		},
+		props:{
+			myName:String
 		},
 		mounted() {
 			this.username = this.$route.params.friendName
